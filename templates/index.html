@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SkinAI WebApp</title>
+</head>
+<body>
+    <h1>SkinAI WebApp</h1>
+    <p>Upload a skin image to predict the disease:</p>
+
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <input type="submit" value="Upload & Predict">
+    </form>
+</body>
+</html>
