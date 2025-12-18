@@ -1,15 +1,175 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>SkinAI WebApp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinAI - Skin Disease Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        #uploadForm {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        input[type="file"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px dashed #ddd;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        #loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        #result {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .image-container img {
+            max-width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .disease-name {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .confidence {
+            background-color: #e8f5e9;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .info-section {
+            margin-bottom: 20px;
+        }
+        
+        .info-section h3 {
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .info-section p {
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .warning-message {
+            background-color: #fff3e0;
+            color: #f57c00;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        #imagePreview {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        #imagePreview img {
+            max-width: 200px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 <body>
-    <h1>SkinAI WebApp</h1>
-    <p>Upload a skin image to predict the disease:</p>
 
-    <form action="/predict" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" required>
-        <input type="submit" value="Upload & Predict">
-    </form>
+    <h2>🧬 SkinAI - Skin Disease Detection System</h2>
+    
+    <div id="uploadForm">
+        <form id="skinForm">
+            <label for="imageInput"><strong>Upload Skin/Nail Image:</strong></label>
+            <input type="file" id="imageInput" accept=".png,.jpg,.jpeg,.gif" required>
+            
+            <div id="imagePreview" style="display: none;">
+                <p><strong>Image Preview:</strong></p>
+                <img id="previewImage" src="" alt="Image Preview">
+            </div>
+            
+            <p style="color: #666; font-size: 14px; margin-top: 10px;">
+                Supported diseases: Acne, Hyperpigmentation, Nail Psoriasis, Vitiligo
+            </p>
+            
+            <button type="submit">🔍 Analyze Image</button>
+        </form>
+    </div>
+    
+    <div id="loading" style="display:none;">
+        <div style="text-align: center;">
+            <p>🔄 Analyzing image... Please wait</p>
+            <p style="font-size: 14px; color: #777;">This may take a few seconds</p>
+        </div>
+    </div>
+    
+    <div id="result"></div>
+
+    <!-- ربط JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>
