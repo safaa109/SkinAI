@@ -1,4 +1,12 @@
 venv/
 __pycache__/
-*.pyc
-static/uploads/*
+data/
+dataset/
+uploads/
+*.pth
+*.pt
+*.zip
+*.jpg
+*.jpeg
+*.png
+*.webp
